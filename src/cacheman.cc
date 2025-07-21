@@ -158,7 +158,6 @@ bool cacheman::AddIFileCandidate(const string &sPathRel)
 		if(t == EIDX_RELEASE)
 			atts.uptodate = true;
 		return true;
-}
 	}
  	return false;
 }
