@@ -153,10 +153,13 @@ bool cacheman::AddIFileCandidate(const string &sPathRel)
 	&& (t=GuessMetaTypeFromURL(sPathRel)))
  	{
 		tIfileAttribs & atts=m_metaFilesRel[sPathRel];
- 		atts.vfile_ondisk=true;
+		atts.vfile_ondisk=true;
 		atts.eIdxType=t;
- 		return true;
-     }
+		if(t == EIDX_RELEASE)
+			atts.uptodate = true;
+		return true;
+}
+	}
  	return false;
 }
 
@@ -1304,7 +1307,7 @@ int cacheman::PatchOne(cmstring& pindexPathRel, const tStrDeq& siblings)
 					if(len < diffIdxSfx.length())
                         return PATCH_FAIL; // heh?
                     h.h[header::XORIG][len-diffIdxSfx.length()] = 0;
-				}                
+				}
 
 				if(m_bVerbose)
 					SendFmt << "Installing as " << path << ", state: " <<  probeStateWanted << hendl;
