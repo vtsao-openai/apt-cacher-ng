@@ -155,8 +155,10 @@ bool cacheman::AddIFileCandidate(const string &sPathRel)
 		tIfileAttribs & atts=m_metaFilesRel[sPathRel];
 		atts.vfile_ondisk=true;
 		atts.eIdxType=t;
+#ifdef NEVER_EXPIRE_IN_RELEASE
 		if(t == EIDX_RELEASE)
 			atts.uptodate = true;
+#endif
 		return true;
 	}
  	return false;
